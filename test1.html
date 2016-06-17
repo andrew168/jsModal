@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="css/jsmodal-light.css" rel="stylesheet" type="text/css" />
+    <script src="js/jsmodal-1.0d.js"></script>
+
+</head>
+<body>
+
+<button id="modal-1" onclick="testShowMsg()"> show msg </button>
+<button id="modal-2" onclick="testPrompt()"> show message with cancel button</button>
+
+<script>
+
+    function showMsg(msg) {
+        Modal.open({content: msg});
+    }
+
+    function prompt(msg) {
+        Modal.open({content: msg, onOk: onOk, onCancel: onCancel});
+    }
+
+    function onOk() {
+        console.log("Ok!");
+    }
+
+    function onCancel() {
+        console.log("cancelled!");
+    }
+
+    function testShowMsg() {
+        showMsg("Welcome!");
+    }
+
+    function testPrompt() {
+        prompt("Are you sure?");
+    }
+</script>
+
+</body>
+</html>

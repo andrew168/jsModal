@@ -39,7 +39,9 @@ var Modal = (function () {
                 closeAfter: 0,
                 openCallback: false,
                 closeCallback: false,
-                hideOverlay: false
+                hideOverlay: false,
+                onOk:null,
+                onCancel:null
             };
 
         // Open the modal
@@ -53,6 +55,8 @@ var Modal = (function () {
             settings.closeCallback = parameters.closeCallback || defaultSettings.closeCallback;
             settings.openCallback = parameters.openCallback || defaultSettings.openCallback;
             settings.hideOverlay = parameters.hideOverlay || defaultSettings.hideOverlay;
+            settings.onOk = parameters.onOk || defaultSettings.onOk;
+            settings.onCancel = parameters.onCancel || defaultSettings.onCancel;
 
             centerModal = function () {
                 method.center({});
@@ -91,15 +95,9 @@ var Modal = (function () {
             modalClose.onclick = function () {
                 if (!settings.hideClose) {
                     method.close();
-                } else {
-                    return false;
-                }
-            };
-            modalOverlay.onclick = function () {
-                if (!settings.lock) {
-                    method.close();
-                } else {
-                    return false;
+                    if (settings.onCancel) {
+                        settings.onCancel();
+                    }
                 }
             };
 
